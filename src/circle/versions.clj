@@ -36,6 +36,3 @@
          b)))
   ([]
      (branch? "master")))
-
-(defn -main [& args]
-  (println "yo"))
