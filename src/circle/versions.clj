@@ -17,13 +17,17 @@
 (defn git-branch [repo]
   (.getBranch repo))
 
-(defn short-sha []
+(defn short-sha
+  "Returns the 7-char SHA1 for the current commit"
+  []
   (let [head (.resolve (repo) "HEAD")]
     (-> head
         (.abbreviate 7)
         (.name))))
 
-(defn branch []
+(defn branch
+  "Returns the current branch. Uses the CIRCLECI_BRANCH env var, if present, else consults git"
+  []
   (if-let [circle-branch (System/getenv "CIRCLECI_BRANCH")]
     circle-branch
     (git-branch (repo {:root "."}))))
